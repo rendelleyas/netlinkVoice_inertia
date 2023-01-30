@@ -1,9 +1,14 @@
 <template>
     <section class="p-6 bg-gray-200">
         <header class="flex justify-between">
-            <h1 class="font-bold text-lg">
-                MyApp
-            </h1>
+            <div class="flex">
+                <h1 class="font-bold text-lg">
+                    MyApp
+                </h1>
+                <p class="text-sm ml-4">
+                    Hello, Welcome back {{ username }}
+                </p>
+            </div>
             <Navigation />
         </header>
     </section>
@@ -19,6 +24,11 @@
 import Navigation from "../Shared/Navigation.vue"
 
 export default{
-    components : {Navigation}
+    components : {Navigation},
+    computed: {
+        username (){
+            return this.$page.props.auth.user.username;
+        }
+    }
 }
 </script>
