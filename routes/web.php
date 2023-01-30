@@ -15,12 +15,20 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    // return view('app');
-    // return inertia('Welcome');
     return Inertia::render('Home', [
         'name' => 'Rendell Pogi',
         'frameworks' => [
             'Laravel', 'Vue', 'Inertia'
         ],
     ]);
+});
+
+
+Route::get('/users', function () {
+    return Inertia::render('Users');
+});
+
+
+Route::get('/settings', function () {
+    return Inertia::render('Settings');
 });
