@@ -3,6 +3,8 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +27,19 @@ Route::get('/', function () {
 });
 
 
-Route::get('/users', function () {
-    return Inertia::render('Users',[
-        'users' => User::paginate()->through( fn($users) => [
-            'id' => $users->id,
-            'name' => $users->name
-        ])
+Route::get('/users', function ( Request $request) {
+
+    return Inertia::render('Users',[    
+        'users' => User::when($request->search, function ($query, $search){
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->paginate(10)
+            ->through(fn($users) => [
+                'id' => $users->id,
+                'name' => $users->name
+            ])
+            ->withQueryString(), //preserve the state of the request param : paginate and filter
+        'filters' => FacadesRequest::only(['search'])
     ]);
 });
 
