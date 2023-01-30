@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // return view('app');
-    return inertia('Welcome');
+    // return inertia('Welcome');
+    return Inertia::render('Home', [
+        'name' => 'Rendell Pogi',
+        'frameworks' => [
+            'Laravel', 'Vue', 'Inertia'
+        ],
+    ]);
 });
