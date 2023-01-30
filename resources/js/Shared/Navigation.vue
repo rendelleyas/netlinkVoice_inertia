@@ -1,6 +1,6 @@
 <template>
     <nav class="ml-6">
-        <ul class="flex list-disc space-x-4 list-inside">
+        <ul class="flex list-none space-x-4 list-inside">
             <li>
                 <NavLink href="/" :active="$page.component == 'Home'">
                     Home
@@ -16,9 +16,10 @@
                     Settings
                 </NavLink>
             </li>
-            <li><Link href="/logout" method="post" as="button" class="text-blue-500 hover:underline"
-                :data="{ name : 'Rendell'}">Log Out
-                </Link>
+            <li>
+                <NavLink href="/logout" method="post" as="button" :active="false" :data="{ name : 'Rendell'}">
+                    Logout
+                </NavLink>
             </li>
         </ul>
    </nav>
