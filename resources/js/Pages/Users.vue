@@ -12,9 +12,12 @@
    
 
 </template>
-<script setup>
+<script>
     import Layout from "../Shared/Layout.vue"
-    defineProps({
-        time: String,
-    })
+    export default {
+        props: {
+            time: String,
+        },
+        layout : Layout
+    }
 </script>

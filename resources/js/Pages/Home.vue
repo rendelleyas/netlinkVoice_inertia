@@ -12,6 +12,7 @@ export default {
         name: String,
         frameworks: Array,
     },
-    components : {Layout}
+    layout : Layout
+
 };
 </script>
