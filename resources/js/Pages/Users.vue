@@ -1,6 +1,9 @@
 <template>
-    <h1>Users</h1>
-    <Navigation />
+    <Layout>
+        <h1>
+            Users
+        </h1>
+    </Layout>
 
     <div :style="{marginTop: '900px'}">
         <p>The current time is {{ time }}</p>
@@ -9,11 +12,11 @@
 
 </template>
 <script>
-import Navigation from "../Shared/Navigation.vue"
+import Layout from "../Shared/Layout.vue"
 import {Link} from '@inertiajs/vue3';
 
 export default {
-    components : {Navigation, Link},
+    components : {Layout, Link},
     props: {
         time: String,
     }

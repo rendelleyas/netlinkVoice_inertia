@@ -1,15 +1,17 @@
 <template>
-    <h1>Home</h1>
-
-    <Navigation />
+   <Layout>
+        <h1 class="text-4xl font-bold">
+            Home
+        </h1>
+   </Layout>
 </template>
 <script>
-import Navigation from "../Shared/Navigation.vue"
+import Layout from "../Shared/Layout.vue"
 export default {
     props: {
         name: String,
         frameworks: Array,
     },
-    components : {Navigation}
+    components : {Layout}
 };
 </script>
