@@ -11,4 +11,9 @@ createInertiaApp({
         .use(plugin)
         .mount(el)
     },
+    progress: {
+        color: 'red',
+        delay: 250,
+        showSpinner: true
+    }
 })

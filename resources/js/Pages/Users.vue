@@ -1,15 +1,13 @@
 <template>
-    <h1>Home</h1>
-
+    <h1>Users</h1>
     <Navigation />
+
 </template>
 <script>
 import Navigation from "../Shared/Navigation.vue"
+
 export default {
-    props: {
-        name: String,
-        frameworks: Array,
-    },
     components : {Navigation}
-};
+
+}
 </script>
