@@ -27,7 +27,8 @@ Route::get('/', function () {
 
 Route::get('/users', function () {
     return Inertia::render('Users',[
-        'users' => User::all()->map( fn($users) => [
+        'users' => User::paginate()->through( fn($users) => [
+            'id' => $users->id,
             'name' => $users->name
         ])
     ]);
