@@ -1,11 +1,14 @@
 <template>
-    <h1>Settings</h1>
-    <Navigation />
+     <Layout>
+        <h1>
+            Settings
+        </h1>
+    </Layout>
 </template>
 <script>
-import Navigation from "../Shared/Navigation.vue"
+import Layout from "../Shared/Layout.vue"
 
 export default {
-    components : {Navigation}
+    components : {Layout}
 }
 </script>
