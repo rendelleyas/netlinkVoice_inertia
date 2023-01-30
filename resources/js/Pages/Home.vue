@@ -6,13 +6,10 @@
    </Layout>
 </template>
 <script>
-import Layout from "../Shared/Layout.vue"
 export default {
     props: {
         name: String,
         frameworks: Array,
     },
-    layout : Layout
-
 };
 </script>

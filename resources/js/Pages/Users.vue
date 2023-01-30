@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <h1>
+        <h1 class="text-4xl font-bold">
             Users
         </h1>
         <div :style="{marginTop: '900px'}">
@@ -13,11 +13,9 @@
 
 </template>
 <script>
-    import Layout from "../Shared/Layout.vue"
     export default {
         props: {
             time: String,
         },
-        layout : Layout
     }
 </script>
