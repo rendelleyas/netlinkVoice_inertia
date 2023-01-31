@@ -17,7 +17,7 @@
                 </NavLink>
             </li>
             <li>
-                <NavLink href="/logout" method="post" as="button" :active="false" :data="{ name : 'Rendell'}">
+                <NavLink href="/logout" method="post" as="button">
                     Logout
                 </NavLink>
             </li>
