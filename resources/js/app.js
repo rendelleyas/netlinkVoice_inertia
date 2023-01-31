@@ -5,9 +5,14 @@ import Layout from "./Shared/Layout.vue"
 
 createInertiaApp({
     resolve: name => {
+
         const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
         let page = pages[`./Pages/${name}.vue`];
-        page.default.layout =  page.default.layout || Layout
+
+        // if(){
+            
+        // }
+        page.default.layout =  (page.default.layout === null)? null : page.default.layout || Layout;  // if layoui is null, set as null, if not choose the setted layout, if no set, choose default
         return page    
     },
     setup({ el, App, props, plugin }) {

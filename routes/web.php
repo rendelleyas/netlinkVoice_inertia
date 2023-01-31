@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as FacadesRequest;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,38 +20,34 @@ use Illuminate\Support\Facades\Request as FacadesRequest;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Home', [
-        'name' => 'Rendell Pogi',
-        'frameworks' => [
-            'Laravel', 'Vue', 'Inertia'
-        ],
-    ]);
+Route::get('login', [LoginController::class, 'create'])->name('login');
+Route::post('login', [LoginController::class, 'store']);
+
+Route::middleware('auth')->group(function() {
+
+    Route::get('/', function () {
+        return Inertia::render('Home', [
+            'name' => 'Rendell Pogi',
+            'frameworks' => [
+                'Laravel', 'Vue', 'Inertia'
+            ],
+        ]);
+    });
+    
+    
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/create', [UserController::class, 'create']) 
+        // })->middleware('can:create, App\Models\User');
+        ->can('create', 'App\Models\User'); //you can use either of can() or middleware()
+    Route::post('/users', [UserController::class, 'store']);
+    Route::get('/users/{id}/edit', [UserController::class, 'edit']);
+    Route::put('/users/{id}/edit', [UserController::class, 'update']);
+
+    
+    Route::get('/settings', function () {
+        return Inertia::render('Settings');
+    });
+    
+    Route::post('/logout', [LoginController::class, 'destroy']);
 });
 
-
-Route::get('/users', function ( Request $request) {
-
-    return Inertia::render('Users',[    
-        'users' => User::when($request->search, function ($query, $search){
-                $query->where('name', 'like', "%{$search}%");
-            })
-            ->paginate(10)
-            ->through(fn($users) => [
-                'id' => $users->id,
-                'name' => $users->name
-            ])
-            ->withQueryString(), //preserve the state of the request param : paginate and filter
-        'filters' => FacadesRequest::only(['search'])
-    ]);
-});
-
-
-Route::get('/settings', function () {
-    return Inertia::render('Settings');
-});
-
-
-Route::post('/logout', function () {
-    dd(request('name'));
-});
