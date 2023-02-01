@@ -12,7 +12,7 @@ class UserPolicy
    
     public function create(User $user)
     {
-        return $user->email == 'sampletwo@yopmail.com';
+        return $user->email == 'sampleone@yopmail.com';
         // return $user->email == 'sampleone@yopmail.com';
     }
 

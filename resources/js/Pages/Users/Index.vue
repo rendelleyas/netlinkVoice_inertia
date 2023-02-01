@@ -31,6 +31,12 @@
                                 :href="`/users/${user.id}/edit`" class="text-indigo-500 font-bold">
                                 Edit
                             </Link>
+                            <button 
+                                v-if="user.can.editable"
+                                class="text-red-500 font-bold"
+                                @click="remove(user)">
+                                Delete
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -39,13 +45,32 @@
     </div>
     <!-- Paginate -->
     <Pagination :links="users.links" class="mt-6"/>
+
+    <!-- Modal -->
+    <Modal :show="showing" @close="close" title="Delete User">
+        <div>
+            Are you sure you want to delete {{ form.name }}?
+        </div>
+        <div class="float-right mt-8">
+            <button class="bg-red-400 text-white rounded py-2 px-4 hover:bg-blue-500 mr-2"
+                :disabled="processing"
+                @click="removeUser">Remove
+            </button>
+            <button class="bg-gray-400 text-white rounded py-2 px-4 hover:bg-blue-500"
+                @click="close">
+                Cancel
+            </button>
+        </div>
+    </Modal>
+    
     
 </template>
 <script setup>
     import Pagination from '../../Shared/Pagination.vue'
+    import Modal from '../../Shared/Modal.vue'
     import {ref, watch} from "vue";
-    import { router } from '@inertiajs/vue3'
     import debounce from "lodash/debounce";
+    import { router, useForm  } from '@inertiajs/vue3'
 
     let props = defineProps({
         users: Object,
@@ -55,6 +80,8 @@
 
     let search = ref(props.filters.search);
 
+    let processing = ref(false);
+
 
     watch(search, debounce(function(value){
             router.get('/users', {search : value}, {
@@ -63,5 +90,34 @@
         }, 500)
     );
 
+    let form = useForm({
+        id: 0,
+        name: '',
+    })
+
+    let remove = (user) => {
+        console.log(user);
+
+        form.id = user.id
+        form.name = user.name
+        showing.value = true;
+    } 
+
+    let showing = ref(false);
+
+    let close = () => {
+        showing.value = false;
+    }
+
+    let removeUser = () => {
+        console.log(form.id)
+        form.delete(`/users/${form.id}`, {
+            onStart: () => { processing.value = true},
+            onFinish: () => { processing.value = false; showing.value = false},
+        });
+    }
+
+
    
+
 </script>
