@@ -30,7 +30,7 @@
 </template>
 <script setup>
 import {ref, watch} from "vue";
-import Modal from '../Shared/NewModal.vue'
+// import Modal from '../Shared/NewModal.vue'
 import ModalTwo from '../Shared/NewModalTwo.vue'
 
 

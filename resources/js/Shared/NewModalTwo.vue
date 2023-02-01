@@ -37,6 +37,7 @@
 
     let props = defineProps({
         show : Boolean,
+        title : String,
     })
 
     const emit = defineEmits(['close'])
