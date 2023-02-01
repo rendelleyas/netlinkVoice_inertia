@@ -1,6 +1,7 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp, Link, Head } from '@inertiajs/vue3'
 import Layout from "./Shared/Layout.vue"
+import store from './store/store'
 
 
 createInertiaApp({
@@ -15,6 +16,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
         .use(plugin)
+        .use(store)
         .component('Link', Link)
         .component('Head', Head)
         .mount(el)
