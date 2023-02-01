@@ -37,8 +37,6 @@
 </style >
 <script setup>
 
-     import {watch, defineEmits } from "vue";
-
     const emit = defineEmits(['close'])
 
     let props = defineProps({
